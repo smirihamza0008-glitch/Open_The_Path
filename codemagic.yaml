@@ -12,10 +12,6 @@ workflows:
       branch_patterns:
         - target: main
     scripts:
-      - name: Initialize Android Template
-        script: |
-          # توليد البيئة والبنية التحتية للأندرويد بشكل فوري وقاطع
-          flutter create . --platforms=android --project-name=open_the_path
       - name: Set up local.properties
         script: |
           echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
@@ -30,7 +26,7 @@ workflows:
     publishing:
       email:
         recipients:
-          - your_email@example.com # ضع إيميلك الشخصي هنا لتستلم التطبيق فوراً
+          - your_email@example.com
         notify:
           success: true
           failure: true
