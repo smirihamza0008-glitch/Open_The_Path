@@ -12,6 +12,10 @@ workflows:
       branch_patterns:
         - target: main
     scripts:
+      - name: Recreate Android directory if missing
+        script: |
+          # هذا الأمر السحري يقوم بإنشاء مجلد الأندرويد وكل ملفات النظام الناقصة تلقائياً
+          flutter create . --platforms=android
       - name: Set up local.properties
         script: |
           echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
