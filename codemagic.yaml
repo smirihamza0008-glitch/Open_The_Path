@@ -6,13 +6,11 @@ workflows:
     environment:
       flutter: 3.22.2
       xcode: latest
-      groups:
-        - keystore_credentials
     triggering:
       events:
         - push
       branch_patterns:
-        - main
+        - pattern: main
     scripts:
       - name: Configure Java Environment & Local Properties
         script: |
