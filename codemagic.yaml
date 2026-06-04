@@ -1,25 +1,28 @@
 workflows:
   android-workflow:
-    name: Android Build Workflow
+    name: Open The Path Production Build
     max_build_duration: 60
     instance_type: mac_mini_m1
     environment:
       flutter: 3.22.2
       xcode: latest
+      groups:
+        - keystore_credentials
     triggering:
       events:
         - push
       branch_patterns:
-        - target: main
+        - main
     scripts:
-      - name: Set up local properties
+      - name: Configure Java Environment & Local Properties
         script: |
           echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
-      - name: Get dependencies
+          echo "sdk.dir=$ANDROID_SDK_ROOT" >> android/local.properties
+      - name: Fetch Flutter Dependencies
         script: |
           flutter pub get
-      - name: Build Android APK
+      - name: Execute Autonomous Android Release Build
         script: |
-          flutter build apk --release
+          flutter build apk --release --no-shrink
     artifacts:
-      - build/app/outputs/flutter-apk/**/app-release.apk
+      - build/app/outputs/flutter-apk/app-release.apk
