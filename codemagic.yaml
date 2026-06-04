@@ -1,10 +1,10 @@
 workflows:
-  android-build:
-    name: Android Release Build
+  android-workflow:
+    name: Android Build Workflow
     max_build_duration: 60
     instance_type: mac_mini_m1
     environment:
-      flutter: 3.19.6 # هذا الإصدار المستقر يحل مشكلة الـ Kotlin تماماً في السيرفر
+      flutter: 3.22.2
       xcode: latest
     triggering:
       events:
@@ -12,10 +12,10 @@ workflows:
       branch_patterns:
         - target: main
     scripts:
-      - name: Set up local.properties
+      - name: Set up local properties
         script: |
           echo "flutter.sdk=$FLUTTER_ROOT" > android/local.properties
-      - name: Get Flutter packages
+      - name: Get dependencies
         script: |
           flutter pub get
       - name: Build Android APK
@@ -23,10 +23,3 @@ workflows:
           flutter build apk --release
     artifacts:
       - build/app/outputs/flutter-apk/**/app-release.apk
-    publishing:
-      email:
-        recipients:
-          - your_email@example.com
-        notify:
-          success: true
-          failure: true
