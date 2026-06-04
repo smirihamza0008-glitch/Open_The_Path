@@ -12,12 +12,12 @@ public class MainActivity extends FlutterActivity {
     public void configureFlutterEngine(@NonNull FlutterEngine flutterEngine) {
         super.configureFlutterEngine(flutterEngine);
 
-        new MethodChannel(flutterEngine.getDartExecutor().getBinaryMessenger(), CHANNEL)
+        // تعديل طريقة الوصول للـ BinaryMessenger لتتوافق تماماً مع إصدار 3.13.0
+        new MethodChannel(flutterEngine.getDartExecutor(), CHANNEL)
             .setMethodCallHandler(new MethodChannel.MethodCallHandler() {
                 @Override
                 public void onMethodCall(@NonNull io.flutter.plugin.common.MethodCall call, @NonNull MethodChannel.Result result) {
                     if (call.method.equals("checkPath")) {
-                        // قراءة وتأمين النصوص عبر الاستدعاء المباشر دون عمل import خارجي
                         Object pathArgument = call.argument("path");
                         Object paramArgument = call.argument("param");
 
