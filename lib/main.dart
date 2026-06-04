@@ -15,8 +15,7 @@ void main() async {
     DeviceOrientation.landscapeLeft,
     DeviceOrientation.landscapeRight,
   ]);
-  await SystemChrome.setEnabledSystemU someMode(SystemUiMode.immersion);
-
+  await SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
   runApp(const OpenThePathApp());
 }
 
