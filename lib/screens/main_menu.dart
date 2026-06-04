@@ -72,7 +72,7 @@ class _MainMenuScreenState extends State<MainMenuScreen> with SingleTickerProvid
                   'OPEN THE PATH',
                   style: TextStyle(
                     fontSize: 48,
-                    fontWeight: FontWeight.black,
+                    fontWeight: FontWeight.w900,
                     letterSpacing: 6,
                     color: const Color(0xff00ffcc),
                     shadows: [
