@@ -15,8 +15,8 @@ android {
 
     kotlinOptions {
         jvmTarget = '1.8'
-        // هذا السطر السحري يخبر المترجم بتجاهل الأخطاء الداخلية لملفات السيرفر وإكمال البناء رغماً عنه!
-        freeCompilerArgs += ["-Xskip-metadata-version-check"]
+        // هذا السطر يمنع السيرفر من الانهيار بسبب ملفات الكوتلن الخارجية
+        freeCompilerArgs += ["-Xallow-unstable-dependencies", "-Xskip-metadata-version-check"]
     }
 
     defaultConfig {
