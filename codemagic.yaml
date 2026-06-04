@@ -14,7 +14,6 @@ workflows:
     scripts:
       - name: Force Clear Cache & Clean Project
         script: |
-          echo "Cleaning cache..."
           rm -rf android/.gradle
           rm -rf ~/.gradle/caches
           flutter clean
@@ -27,6 +26,7 @@ workflows:
           flutter pub get
       - name: Execute Autonomous Android Release Build
         script: |
-          flutter build apk --release
+          cd android
+          ./gradlew assembleRelease --no-daemon
     artifacts:
       - build/app/outputs/flutter-apk/app-release.apk
