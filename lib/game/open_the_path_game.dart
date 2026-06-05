@@ -1,5 +1,4 @@
 import 'package:flame/game.dart';
-import 'package:flame/input.dart';
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +7,8 @@ import 'finish_line_component.dart';
 import 'tap_obstacle_component.dart';
 import 'slide_obstacle_component.dart';
 
-// الاعتماد على معمارية التتبع القياسية والمستقرة في Flame لتجنب مشاكل الميكسات الحديثة
-class OpenThePathGame extends FlameGame with HasCollisionDetection, HasTappables, HasDraggables {
+// استخدام الميكسات الحديثة المعتمدة لدى المترجم السحابي حالياً
+class OpenThePathGame extends FlameGame with HasCollisionDetection, HasTappableComponents, HasDraggableComponents {
   late PlayerComponent player;
   late FinishLineComponent finishLine;
 
@@ -30,7 +29,6 @@ class OpenThePathGame extends FlameGame with HasCollisionDetection, HasTappables
   void startLevel() {
     removeAll(children);
 
-    // إضافة كائن اللاعب
     player = PlayerComponent(
       position: Vector2(50, size.y / 2 - 20),
       size: Vector2(40, 40),
@@ -38,20 +36,17 @@ class OpenThePathGame extends FlameGame with HasCollisionDetection, HasTappables
     );
     add(player);
 
-    // إضافة خط النهاية
     finishLine = FinishLineComponent(
       position: Vector2(size.x - 60, 0),
       size: Vector2(20, size.y),
     );
     add(finishLine);
 
-    // إضافة عائق النقر
     add(TapObstacleComponent(
       position: Vector2(size.x * 0.3, size.y / 2 - 40),
       size: Vector2(50, 80),
     ));
 
-    // إضافة عائق السحب
     add(SlideObstacleComponent(
       position: Vector2(size.x * 0.6, size.y / 2 - 50),
       size: Vector2(40, 100),
