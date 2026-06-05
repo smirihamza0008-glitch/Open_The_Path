@@ -1,11 +1,12 @@
-import 'dart:ui';
+import 'dart:ui' as ui;
 import 'package:flame/components.dart';
 import 'package:flame/collisions.dart';
-import 'package:flutter/material.dart' hide ImageFilter;
+import 'package:flame/events.dart';
+import 'package:flutter/material.dart';
 import 'open_the_path_game.dart';
 import 'player_component.dart';
 
-class TapObstacleComponent extends PositionComponent with HasGameRef<OpenThePathGame>, CollisionCallbacks, Tappable {
+class TapObstacleComponent extends PositionComponent with HasGameRef<OpenThePathGame>, CollisionCallbacks, TapCallbacks {
   int clicksLeft = 3;
 
   TapObstacleComponent({
@@ -20,12 +21,12 @@ class TapObstacleComponent extends PositionComponent with HasGameRef<OpenThePath
   }
 
   @override
-  bool onTapDown(TapDownInfo info) {
+  void onTapDown(TapDownEvent event) {
     clicksLeft--;
     if (clicksLeft <= 0) {
       removeFromParent();
     }
-    return true;
+    event.handled = true;
   }
 
   @override
@@ -55,7 +56,7 @@ class TapObstacleComponent extends PositionComponent with HasGameRef<OpenThePath
 
     final glowPaint = Paint()
       ..color = color.withOpacity(0.4)
-      ..imageFilter = ImageFilter.blur(sigmaX: 15, sigmaY: 15);
+      ..imageFilter = ui.ImageFilter.blur(sigmaX: 15, sigmaY: 15);
 
     canvas.drawRRect(RRect.fromRectAndRadius(size.toRect(), const Radius.circular(10)), glowPaint);
     canvas.drawRRect(RRect.fromRectAndRadius(size.toRect(), const Radius.circular(10)), paint);
